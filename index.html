@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/style.min.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/fav/favicon-16x16.png">
+  <link rel="manifest" href="img/fav/site.webmanifest">
+  <link rel="shortcut icon" href="img/fav/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="img/fav/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <title>VRself</title>
+</head>
+<body>
+  <div class="container" id="app">
+    <div id="loader">
+      <div class="lds-ripple"><div></div><div></div></div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-12 col-lg-6 text-center">
+        <div class="fixed-posi">
+          <img class="img-fluid" v-bind:src="logo_r" alt="">
+          <div class="d-block">
+            <a class="d-block" href="mailto:vreunov@vrself.ru"><img class="me-2" width="22" src="img/mail.svg">vreunov@vrself.ru</a>
+            <a class="d-block" href="https://vk.com/vreunov"><img class="me-2" width="22" src="img/vk.svg">vreunov</a>
+            <small class="d-block mt-3">© 2021 VRself</small>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-lg-6">
+        <div class="row main_block">
+          <p class="ms-1"><img class="me-2" src="img/crown.svg" alt="own">own</p>
+          <div v-for="own in owns" class="d-none1" v-bind:class="'d-block col-12 col-lg-'+own.colsize">
+            <div v-bind:class="{ lad: isActive }" class="main_block-i">
+              <div class="container p-4 pt-3 pb-2">
+                <div class="row">
+                  <div class="col-2">
+                    <img class="img-fluid" v-bind:src="'img/projects/'+ own.imagename" alt="">
+                  </div>
+                  <div class="col-10">
+                    <h4>{{ own.title }} <small v-if="own.subtitle" class="text-muted">{{ own.subtitle }}</small></h4>
+                    <p v-html="own.description" class="text-white-80 tx-1 mb-0"></p>
+                  </div>
+                  <div class="col-12 mb-0">
+                    <span v-for="tag in own.tags" class="badge me-1"><i v-bind:class="'badge-i bg-'+tag.title.toLocaleLowerCase().replace('.', '_')"></i>{{ tag.title }}</span>
+                  </div>
+                  <div class="col-12">
+                    <hr class="mt-2">
+                    <a v-for="link in own.links" class="btn btn-link" v-bind:href="link.url"><img class="me-1" v-bind:src="'img/'+link.type+'.svg'" width="22">{{ link.title }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="ms-1"><img class="me-2" src="img/orders.svg" alt="orders">orders</p>
+          <div v-for="own in orders" class="d-none1" v-bind:class="'d-block col-12 col-lg-'+own.colsize">
+            <div class="main_block-i">
+              <div class="container p-4 pt-3 pb-2">
+                <div class="row">
+                  <div class="col-2">
+                    <img class="img-fluid" v-bind:src="'img/projects/'+ own.imagename" alt="">
+                  </div>
+                  <div class="col-10">
+                    <h4>{{ own.title }} <small v-if="own.subtitle" class="text-muted">{{ own.subtitle }}</small></h4>
+                    <p v-html="own.description" class="text-white-80 tx-1 mb-0"></p>
+                  </div>
+                  <div class="col-12 mb-0">
+                    <span v-for="tag in own.tags" class="badge me-1"><i v-bind:class="'badge-i bg-'+tag.title.toLocaleLowerCase()"></i>{{ tag.title }}</span>
+                  </div>
+                  <div class="col-12">
+                    <hr class="mt-2">
+                    <a v-for="link in own.links" class="btn btn-link" v-bind:href="link.url"><img class="me-1" v-bind:src="'img/'+link.type+'.svg'" width="22">{{ link.title }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ru.vuejs.org/js/vue.min.js"></script>
+  <script type="text/javascript">
+  var app = new Vue({
+    el: '#app',
+    data: {
+      isActive: true,
+      logo_r: '',
+      owns: [
+        {
+          title: 'Caller.su',
+          subtitle: '(ex. КтоПозвонил.рф)',
+          imagename: 'caller.png',
+          colsize: '12',
+          description: 'Поисковая система отзывов о мобильных номерах, предназначенная для быстрого обнаружения мошенников, коллекторов, спамеров и других нежелательных абонентов',
+          tags: [
+            { title: 'Python'},
+            { title: 'Bootstrap'},
+            { title: 'Js'},
+          ],
+          links: [
+            {title: 'https://caller.su',url:'https://caller.su',type:'site'}
+          ]
+        },{
+          title: 'AUDROP',
+          subtitle: 'Приостановлен',
+          imagename: 'audrop.jpg',
+          colsize: '6',
+          description: 'Бот-конвертер музыки из стриминговых сервисов в VK',
+          tags: [
+            { title: 'Python'}
+          ],
+          links: [
+            {title: 'https://vk.com/audrop',url:'https://vk.com/audrop',type:'vk'}
+          ]
+        },{
+          title: 'VRself',
+          subtitle: '',
+          imagename: 'vrself.svg',
+          colsize: '6',
+          description: 'Портфолио в портфолио для портфолио!',
+          tags: [
+            { title: 'Bootstrap'},
+            { title: 'vue.js'},
+          ],
+          links: [
+            {title: 'https://vrself.ru',url:'https://vrself.ru',type:'vk'}
+          ]
+        },{
+          title: 'VoiceHack',
+          subtitle: '',
+          imagename: 'voicehack.jpg',
+          colsize: '12',
+          description: 'Распознавание голосовых сообщений ВК<br />- backend для браузерных расширений<br />- бот для ВКонтакте',
+          tags: [
+            { title: 'Python'}
+          ],
+          links: [
+            {title: 'https://vk.com/voicehack',url:'https://vk.com/audrop',type:'vk'},
+            {title: 'Firefox',url:'https://vk.cc/ah8XXt',type:'firefox'},
+            {title: 'Chrome',url:'https://vk.cc/ah8Y9r',type:'chrome'}
+          ]
+        }
+      ],
+      orders: [
+        {
+          title: 'Студия Событий «Есть Повод!»',
+          subtitle: '',
+          imagename: 'est-povod.png',
+          colsize: '12',
+          description: 'Перерисовка лого, дизайн и верстка страницы, «ленивый» рендеринг контента.',
+          tags: [
+
+            { title: 'Bootstrap'},
+            { title: 'Js'},
+          ],
+          links: [
+            {title: 'https://есть-повод.рф',url:'https://есть-повод.рф',type:'site'}
+          ]
+        }
+      ],
+    },
+    mounted() {
+      this.render_logo();
+      this.loader();
+    },
+    methods: {
+      loader() {
+        setTimeout(() => document.querySelector("#loader").remove(), 500);
+        setTimeout(() => this.isActive = false, 600);
+        this.activate();
+      },
+      render_logo(){
+        function randomInteger(min, max) {
+          let rand = min - 0.5 + Math.random() * (max - min + 1);
+          return Math.round(rand);
+        }
+        vm = this;
+        images = ["img/logo.svg", "img/logo.gif", "img/logo2.gif", "img/logo3.gif"]
+        setInterval(function(){
+          img = images[Math.floor(Math.random()*images.length)];
+          vm.logo_r = img;
+        }, randomInteger(100,400));
+      }
+    }
+  }
+)
+</script>
+
+</body>
+</html>
